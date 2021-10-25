@@ -66,13 +66,15 @@ class MyStreamListener(tweepy.StreamListener):
                 for e in el:
                     if isinstance(e,list):
                         event=e[1]
+                        time1+=int(e[0])
                         break
                     else:
+                        if isinstance(e,int):
+                            time1+=int(e)
                         event=e
         else:
             time1=30-int(date_now[2])
-            d_now=int(date_now[1])
-            next_date=d_now
+            d_now=int(date_now[1])+1
             while d_now not in holidays.keys():
                 time1+=30
                 d_now+=1
@@ -80,8 +82,11 @@ class MyStreamListener(tweepy.StreamListener):
             for e in el:
                 if isinstance(e,list):
                     event=e[1]
+                    time1+=int(e[0])
                     break
                 else:
+                    if isinstance(e,int):
+                        time1+=int(e)
                     event=e
 
 
